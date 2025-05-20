@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Пости</title>
+</head>
+
+<body>
+    <h1>Список постів</h1>
+    <h1>{{ post.title }}</h1>
+    <p><strong>Автор:</strong> {{ post.author.name }}</p>
+    <p><strong>Дата:</strong> {{ post.published_date }}</p>
+    <p>{{ post.content }}</p>
+
+    <h2>Коментарі:</h2>
+    {% for comment in comments %}
+    <div>
+        <p><strong>{{ comment.author_name }}:</strong> {{ comment.text }} ({{ comment.created_date }})</p>
+    </div>
+    {% empty %}
+    <p>Немає коментарів.</p>
+    {% endfor %}
+
+    <h3>Додати коментар:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Надіслати</button>
+    </form>
